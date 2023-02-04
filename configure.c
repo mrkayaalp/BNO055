@@ -1,6 +1,17 @@
 #include <stdio.h>
 #include <stdint.h>
 
+void print_bit(int sonuc){
+    printf("0b");
+    for(int i = 7; i>=0; i--){
+        if(sonuc & (1<<i))
+            printf("1");
+        else    
+            printf("0");
+    }
+    printf("\n");
+}
+
 enum G_range {
     accel_2G,
     accel_4G,
@@ -21,6 +32,8 @@ int main() {
        sonuc += 0b10;
     else
        sonuc += 0b11;    
+    
+    print_bit(sonuc);
 
 
        
