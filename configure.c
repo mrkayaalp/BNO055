@@ -53,6 +53,13 @@ enum gyro_Bandwidth{
     gyro_64Hz,
     gyro_32Hz,    
 };
+enum gyro_Operation_Mode{
+    gyro_Normal,
+    gyro_Fast_Power_Up,
+    gyro_Deep_Suspend,
+    gyro_Suspend,
+    gyro_Advanced_Powersave,
+};
 
 
 
@@ -63,6 +70,7 @@ int main() {
     uint8_t gyro_Range;
     uint8_t ACC_Config;
     uint8_t gyro_Bandwidth;
+    uint8_t gyro_Operation_Mode;
     uint8_t GYR_Config_0;
     uint8_t GYR_Config_1;
 
@@ -73,6 +81,8 @@ int main() {
     accel_Operation_Mode = accel_standby;
     gyro_Range = gyro_250dps;
     gyro_Bandwidth = gyro_32Hz;
+    gyro_Operation_Mode = gyro_Advanced_Powersave;
+
 
     if(accel_G_range == accel_2G)
         ACC_Config += 0b00;
@@ -140,11 +150,23 @@ int main() {
         GYR_Config_0 += 0b110000;
     else if (gyro_Bandwidth = gyro_32Hz)
         GYR_Config_0 += 0b111000;    
+
+    if(gyro_Operation_Mode = gyro_Normal)
+        GYR_Config_1 += 0b000;
+    else if(gyro_Operation_Mode = gyro_Fast_Power_Up)
+        GYR_Config_1 += 0b001;
+    else if(gyro_Operation_Mode = gyro_Deep_Suspend)
+        GYR_Config_1 += 0b010;
+    else if(gyro_Operation_Mode = gyro_Suspend)
+        GYR_Config_1 += 0b011;
+    else if(gyro_Operation_Mode = gyro_Advanced_Powersave)
+        GYR_Config_1 += 0b100;    
     
     
     
     print_bit(ACC_Config);
     print_bit(GYR_Config_0);
+    print_bit(GYR_Config_1);
 
        
     
